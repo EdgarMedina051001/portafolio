@@ -1,0 +1,124 @@
+---
+import JAVA from "./icons/JavaIcon.astro";
+import CSHARP from "./icons/CsharpIcon.astro";
+import SQLSERVER from "./icons/SQLServer.astro";
+import ANDROID from "./icons/AndroidIcon.astro";
+import ZKTECO from "./icons/ZKTecoIcon.astro";
+import ASPNET from "./icons/AspNetIcon.astro";
+import FIREBASE from "./icons/FirebaseIcon.astro";
+import JAVASCRIPT from "./icons/JavaScriptIcon.astro";
+import KOTLIN from "./icons/KotlinIcon.astro";
+
+const TAGS = {
+  JAVA: {
+    name: "Java",
+    class: "bg-gray-500/40",
+    icon: JAVA,
+  },
+  CSHARP: {
+    name: "C#",
+    class: "bg-purple-500",
+    icon: CSHARP,
+  },
+  SQLSERVER: {
+    name: "SqlServer",
+    class: "bg-red-500",
+    icon: SQLSERVER,
+  },
+  ANDROID: {
+    name: "Android",
+    class: "bg-green-500",
+    icon: ANDROID,
+  },
+  ZKTECO: {
+    name: "ZKTeco",
+    class: "bg-green-500",
+    icon: ZKTECO,
+  },
+  ASPNET: {
+    name: "ASP.NET",
+    class: "bg-blue-500",
+    icon: ASPNET,
+  },
+  FIREBASE: {
+    name: "Firebase",
+    class: "bg-yellow-500",
+    icon: FIREBASE,
+  },
+  JAVASCRIPT: {
+    name: "JavaScript",
+    class: "bg-yellow-500",
+    icon: JAVASCRIPT,
+  },
+  KOTLIN: {
+    name: "Kotlin",
+    class: "bg-yellow-500",
+    icon: KOTLIN,
+  },
+};
+
+const PROJECTS = [
+  {
+    title: "Requisiciones Digitales - COLCHONES WENDY, S.A. DE C.V",
+    description:
+      "Desarrollo de una aplicación web para la digitalización del proceso de requisiciones de la empresa, utilizando tecnologías como .NET Framework, SqlServer, ZKTeco, entre otras. La aplicación permite a los empleados solicitar productos y servicios de la empresa, así como también a los administradores y jefes gestionar las requisiciones y productos de la empresa. La aplicación cuenta con un sistema de autenticación mediante huella y roles de usuario, así como también un sistema de notificaciones y correos electrónicos.",
+    link: "https://example.com",
+    github: "https://github.com",
+    image: "/public/projects/proyecto_1.webp",
+    tags: [TAGS.ZKTECO, TAGS.CSHARP, TAGS.JAVASCRIPT, TAGS.SQLSERVER, TAGS.ASPNET],
+  },
+  {
+    title: "Aplicacion Nativa Android - Bombas Mejorada S.A. de C.V.",
+    description:
+      "Desarrollo de una aplicación nativa Android para la empresa, utilizando tecnologías como Java, Android Studio y Firebase. Enfocada en la presentación de productos y servicios de la empresa, así como tambien eventos y noticias.",
+    link: "https://example.com",
+    github: "https://github.com",
+    image: "/public/projects/Proyecto_2.webp",
+    tags: [TAGS.JAVA, TAGS.ANDROID, TAGS.FIREBASE],
+  },
+  {
+    title: "Project 3",
+    description: "This is a description of project 3",
+    link: "https://example.com",
+    github: "https://github.com",
+    image: "/public/projects/proyecto_3.webp",
+    tags: [TAGS.JAVA, TAGS.CSHARP, TAGS.SQLSERVER],
+  },
+];
+---
+
+{
+  PROJECTS.map(({ image, title, description, link, github, tags }) => (
+    <article>
+      <h3 class="text-2xl font-semibold text-blue-500 mb-2">{title}</h3>
+      <p class="text-lg mb-4 text-pretty">{description}</p>
+      <li class="flex flex-row gap-y-2 mb-4 ">
+        <span class="flex gap-x-4 items-center bg-gray-700 rounded p-1">
+          <a href={link} target="_blank" rel="noopener noreferrer">
+            Ver proyecto
+          </a>
+        </span>
+        <span class="flex gap-x-4 items-center ms-4 bg-gray-700 rounded p-1">
+          <a href={github} target="_blank" rel="noopener noreferrer">
+            Ver código fuente
+          </a>
+        </span>
+      </li>
+      <ul class="flex gap-x-4 flex-row">
+        {tags.map((tag) => (
+          <li>
+            <span class={`flex gap-x-2 items-center ${tag.class} p-1 rounded`}>
+              <tag.icon class="size-6" />
+              {tag.name}
+            </span>
+          </li>
+        ))}
+      </ul>
+      <img
+        class="rounded shadow-2xl shadow-white/10 py-4"
+        src={image}
+        alt={title}
+      />
+    </article>
+  ))
+}
