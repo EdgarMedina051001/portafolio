@@ -8,52 +8,61 @@ import ASPNET from "./icons/AspNetIcon.astro";
 import FIREBASE from "./icons/FirebaseIcon.astro";
 import JAVASCRIPT from "./icons/JavaScriptIcon.astro";
 import KOTLIN from "./icons/KotlinIcon.astro";
+import LinkButton from "./LinkButton.astro";
+import GithubIcon from "./icons/GithubIcon.astro";
+import WorldIcon from "./icons/WorldIcon.astro";
+import UNITY from "./icons/UnityIcon.astro";
 
 const TAGS = {
   JAVA: {
     name: "Java",
-    class: "bg-gray-500/40",
+    class: "bg-blue-700",
     icon: JAVA,
   },
   CSHARP: {
     name: "C#",
-    class: "bg-purple-500",
+    class: "bg-purple-700",
     icon: CSHARP,
   },
   SQLSERVER: {
     name: "SqlServer",
-    class: "bg-red-500",
+    class: "bg-red-700",
     icon: SQLSERVER,
   },
   ANDROID: {
     name: "Android",
-    class: "bg-green-500",
+    class: "bg-green-700",
     icon: ANDROID,
   },
   ZKTECO: {
     name: "ZKTeco",
-    class: "bg-green-500",
+    class: "bg-green-700",
     icon: ZKTECO,
   },
   ASPNET: {
     name: "ASP.NET",
-    class: "bg-blue-500",
+    class: "bg-blue-700",
     icon: ASPNET,
   },
   FIREBASE: {
     name: "Firebase",
-    class: "bg-yellow-500",
+    class: "bg-yellow-700",
     icon: FIREBASE,
   },
   JAVASCRIPT: {
     name: "JavaScript",
-    class: "bg-yellow-500",
+    class: "bg-yellow-700",
     icon: JAVASCRIPT,
   },
   KOTLIN: {
     name: "Kotlin",
-    class: "bg-yellow-500",
+    class: "bg-purple-700",
     icon: KOTLIN,
+  },
+  UNITY: {
+    name: "Unity",
+    class: "bg-gray-700",
+    icon: UNITY,
   },
 };
 
@@ -61,64 +70,91 @@ const PROJECTS = [
   {
     title: "Requisiciones Digitales - COLCHONES WENDY, S.A. DE C.V",
     description:
-      "Desarrollo de una aplicación web para la digitalización del proceso de requisiciones de la empresa, utilizando tecnologías como .NET Framework, SqlServer, ZKTeco, entre otras. La aplicación permite a los empleados solicitar productos y servicios de la empresa, así como también a los administradores y jefes gestionar las requisiciones y productos de la empresa. La aplicación cuenta con un sistema de autenticación mediante huella y roles de usuario, así como también un sistema de notificaciones y correos electrónicos.",
-    link: "https://example.com",
-    github: "https://github.com",
-    image: "/public/projects/proyecto_1.webp",
-    tags: [TAGS.ZKTECO, TAGS.CSHARP, TAGS.JAVASCRIPT, TAGS.SQLSERVER, TAGS.ASPNET],
+      "Desarrollo de una aplicación web interna para la digitalización del proceso de requisiciones de la empresa, utilizando tecnologías como .NET Framework, SqlServer, ZKTeco, entre otras. La aplicación permite a los empleados solicitar productos y servicios de la empresa, así como también a los administradores y jefes gestionar las requisiciones y productos de la empresa. La aplicación cuenta con un sistema de autenticación mediante huella y roles de usuario, así como también un sistema de notificaciones y correos electrónicos.",
+    link: "",
+    github: "",
+    image: "/projects/Proyecto_1.webp",
+    tags: [
+      TAGS.ZKTECO,
+      TAGS.CSHARP,
+      TAGS.JAVASCRIPT,
+      TAGS.SQLSERVER,
+      TAGS.ASPNET,
+    ],
   },
   {
     title: "Aplicacion Nativa Android - Bombas Mejorada S.A. de C.V.",
     description:
-      "Desarrollo de una aplicación nativa Android para la empresa, utilizando tecnologías como Java, Android Studio y Firebase. Enfocada en la presentación de productos y servicios de la empresa, así como tambien eventos y noticias.",
-    link: "https://example.com",
-    github: "https://github.com",
-    image: "/public/projects/Proyecto_2.webp",
+      "Desarrollo de una aplicación nativa Android interna para la empresa, utilizando tecnologías como Java, Android Studio y Firebase. Enfocada en la presentación de productos y servicios de la empresa, así como tambien eventos y noticias.",
+    link: "",
+    github: "",
+    image: "/projects/Proyecto_2.webp",
     tags: [TAGS.JAVA, TAGS.ANDROID, TAGS.FIREBASE],
   },
   {
-    title: "Project 3",
-    description: "This is a description of project 3",
-    link: "https://example.com",
-    github: "https://github.com",
-    image: "/public/projects/proyecto_3.webp",
-    tags: [TAGS.JAVA, TAGS.CSHARP, TAGS.SQLSERVER],
+    title: "La Postreria - eCommerce (Academico)",
+    description: "Desarrollo de una aplicacion movil para el negocio de postres 'La Postreria', utilizando tecnologias como Kotlin, Firebase y Android Studio. Se realizaron dos aplicaciones independientes para el cliente y el administrador, permitiendo a los clientes realizar pedidos y pagos en linea, asi como tambien a los administradores gestionar los productos y pedidos de la empresa.",
+    link: "",
+    github: "https://github.com/EdgarMedina051001/LaPostreria",
+    image: "/projects/Proyecto_3.webp",
+    tags: [TAGS.FIREBASE, TAGS.KOTLIN, TAGS.ANDROID],
+  },
+  {
+    title: "MuñeckoShop - eCommerce (Academico)",
+    description: "Desarrollo de una aplicacion movil para el negocio de camisetas 'MuñeckoShop', utilizando tecnologias como Kotlin, Firebase y Android Studio. Se realizaron dos aplicaciones independientes para clientes y administradores, permitiendo a los clientes realizar pedidos de productos de la empresa, asi como tambien a los administradores gestionar los productos y pedidos de la empresa.",
+    link: "",
+    github: "https://github.com/EdgarMedina051001/MuneckoShop",
+    image: "/projects/Proyecto_4.webp",
+    tags: [TAGS.FIREBASE, TAGS.KOTLIN, TAGS.ANDROID],
+  },
+  {
+    title: "NightKnight - Juego (Academico)",
+    description: "Desarrollo de un juego para computadora utilizando el motor de videojuegos Unity y C#. El juego consiste en un juego de plataformas en 2D, donde el jugador controla a un caballero medieval que debe avanzar por diferentes niveles, evitando obstaculos y enemigos hasta llegar a el final boss.",
+    link: "https://drive.google.com/drive/folders/1LASmc_IIFdINF9qDBnme9gCKVHH1sgEP?usp=sharing",
+    github: "https://drive.google.com/file/d/1SBDeLvZyhWtkpy5TVXmfMoKGyiNGpG9A/view?usp=sharing",
+    image: "/projects/Proyecto_5.webp",
+    tags: [TAGS.CSHARP, TAGS.UNITY],
   },
 ];
 ---
 
-{
-  PROJECTS.map(({ image, title, description, link, github, tags }) => (
-    <article>
-      <h3 class="text-2xl font-semibold text-blue-500 mb-2">{title}</h3>
-      <p class="text-lg mb-4 text-pretty">{description}</p>
-      <li class="flex flex-row gap-y-2 mb-4 ">
-        <span class="flex gap-x-4 items-center bg-gray-700 rounded p-1">
-          <a href={link} target="_blank" rel="noopener noreferrer">
-            Ver proyecto
-          </a>
-        </span>
-        <span class="flex gap-x-4 items-center ms-4 bg-gray-700 rounded p-1">
-          <a href={github} target="_blank" rel="noopener noreferrer">
-            Ver código fuente
-          </a>
-        </span>
-      </li>
-      <ul class="flex gap-x-4 flex-row">
-        {tags.map((tag) => (
-          <li>
-            <span class={`flex gap-x-2 items-center ${tag.class} p-1 rounded`}>
-              <tag.icon class="size-6" />
-              {tag.name}
-            </span>
-          </li>
-        ))}
-      </ul>
-      <img
-        class="rounded shadow-2xl shadow-white/10 py-4"
-        src={image}
-        alt={title}
-      />
-    </article>
-  ))
-}
+<section class="flex flex-col gap-y-12">
+  {
+    PROJECTS.map(({ image, title, description, link, github, tags }) => (
+      <article class="mb-8">
+        <h3 class="text-2xl font-semibold text-blue-500 mb-2">{title}</h3>
+        <p class="text-lg mb-4 text-pretty text-gray-700 dark:text-white/80">{description}</p>
+        <ul class="flex gap-x-1 flex-wrap mb-4">
+          {tags.map((tag) => (
+            <li>
+              <span
+                class={`flex gap-x-2 items-center ${tag.class} p-2 rounded-md dark:border-white/10 m-1 font-semibold text-white/80 dark:text-white/80`}
+              >
+                <tag.icon class="size-6" />
+                {tag.name}
+              </span>
+            </li>
+          ))}
+        </ul>
+        <img
+          loading="lazy"
+          class="rounded shadow-2xl dark:shadow-white/50 shadow-black/50 aspect-video"
+          src={image}
+          alt={title}
+        />
+        <footer class="flex gap-x-4 justify-end bg-transparent mt-4">
+          {github && (<LinkButton href={github}>
+            <GithubIcon class="size-6" />
+            Ver Código Fuente
+          </LinkButton>
+          )}
+          {link && (<LinkButton href={link}>
+            <WorldIcon class="size-6" />
+            Ver Proyecto
+          </LinkButton>
+          )}
+        </footer>
+      </article>
+    ))
+  }
+</section>

@@ -1,0 +1,31 @@
+---
+import Badge from "@/components/Badge.astro";
+import SectionContainer from "@/components/SectionContainer.astro";
+import Social from "@/components/Social.astro";
+import LinkedInIcon from "@/components/icons/LinkedInIcon.astro";
+
+import Layout from "@/layouts/Layout.astro";
+---
+
+<Layout
+  title="Design System del Portafolio de Edgar Medina"
+  description="Catalogo de componentes del portafolio de Edgar Medina."
+>
+  <SectionContainer class="py-20 pb-24 flex flex-col gap-y-8">
+    <article class="mb-10">
+      <h1 class="mb-4 text-xl font-bold">&lt;Badge&gt;</h1>
+      <Badge>Disponible para trabajar</Badge>
+    </article>
+    <article class="mb-10">
+      <h1 class="mb-4 text-xl font-bold">&lt;Social&gt;</h1>
+      <div class="flex">
+        <Social
+          href="https://www.linkedin.com/in/edgar-geovanni-medina-p%C3%A9rez-580670342/"
+        >
+          <LinkedInIcon class="size-4 md:size-6" />
+          LinkedIn
+        </Social>
+      </div>
+    </article>
+  </SectionContainer>
+</Layout>
