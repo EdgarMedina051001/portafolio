@@ -16,52 +16,42 @@ import UNITY from "./icons/UnityIcon.astro";
 const TAGS = {
   JAVA: {
     name: "Java",
-    class: "bg-blue-700",
     icon: JAVA,
   },
   CSHARP: {
     name: "C#",
-    class: "bg-purple-700",
     icon: CSHARP,
   },
   SQLSERVER: {
     name: "SqlServer",
-    class: "bg-red-700",
     icon: SQLSERVER,
   },
   ANDROID: {
     name: "Android",
-    class: "bg-green-700",
     icon: ANDROID,
   },
   ZKTECO: {
     name: "ZKTeco",
-    class: "bg-green-700",
     icon: ZKTECO,
   },
   ASPNET: {
     name: "ASP.NET",
-    class: "bg-blue-700",
     icon: ASPNET,
   },
   FIREBASE: {
     name: "Firebase",
-    class: "bg-yellow-700",
     icon: FIREBASE,
   },
   JAVASCRIPT: {
     name: "JavaScript",
-    class: "bg-yellow-700",
     icon: JAVASCRIPT,
   },
   KOTLIN: {
     name: "Kotlin",
-    class: "bg-purple-700",
     icon: KOTLIN,
   },
   UNITY: {
     name: "Unity",
-    class: "bg-gray-700",
     icon: UNITY,
   },
 };
@@ -118,7 +108,7 @@ const PROJECTS = [
 ];
 ---
 
-<section class="flex flex-col gap-y-12">
+<section class="flex flex-col gap-y-12 border border-gray-200 dark:border-white/10 p-8 rounded-lg dark:bg-violet-950/5 bg-violet-950/5">
   {
     PROJECTS.map(({ image, title, description, link, github, tags }) => (
       <article class="mb-8">
@@ -128,9 +118,9 @@ const PROJECTS = [
           {tags.map((tag) => (
             <li>
               <span
-                class={`flex gap-x-2 items-center ${tag.class} p-2 rounded-md dark:border-white/10 m-1 font-semibold text-white/80 dark:text-white/80`}
+                class={`flex gap-x-2 items-center p-2 rounded-md dark:border-white/10 m-1 font-semibold text-white/80 dark:text-white/80`}
               >
-                <tag.icon class="size-6" />
+                <tag.icon class="size-8" />
                 {tag.name}
               </span>
             </li>
