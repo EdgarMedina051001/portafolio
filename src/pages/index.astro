@@ -6,6 +6,8 @@ import Layout from "../layouts/Layout.astro";
 import Projects from "../components/Projects.astro";
 import SectionContainer from "../components/SectionContainer.astro";
 import TitleSection from "@/components/TitleSection.astro";
+import ExperienceIcon from "@/components/icons/ExperienceIcon.astro";
+import ProjectsIcon from "@/components/icons/ProjectsIcon.astro";
 ---
 
 <Layout
@@ -19,21 +21,21 @@ import TitleSection from "@/components/TitleSection.astro";
 
     <SectionContainer id="experiencia" class="w-full mx-auto lg:w-[740px]">
       <TitleSection>
-        Experiencia Laboral
+        Experiencia Laboral <ExperienceIcon class="size-8" />
       </TitleSection>
       <Experience />
     </SectionContainer>
 
     <SectionContainer id="proyectos" class="w-full mx-auto lg:w-[740px]">
       <TitleSection>
-        Proyectos
+        Proyectos <ProjectsIcon class="size-8" />
       </TitleSection>
       <Projects />
     </SectionContainer>
 
     <SectionContainer id="sobre-mi" class="w-full mx-auto lg:w-[740px]">
       <TitleSection>
-        Sobre mí
+        Sobre mí 👨‍💻
       </TitleSection>
       <AboutMe/>
     </SectionContainer>
