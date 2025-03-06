@@ -12,6 +12,9 @@ import LinkButton from "./LinkButton.astro";
 import GithubIcon from "./icons/GithubIcon.astro";
 import WorldIcon from "./icons/WorldIcon.astro";
 import UNITY from "./icons/UnityIcon.astro";
+import SHOPIFY from "./icons/ShopifyIcon.astro";
+import HTML from "./icons/HtmlIcon.astro";
+import CSS from "./icons/CssIcon.astro";
 
 const TAGS = {
   JAVA: {
@@ -54,6 +57,18 @@ const TAGS = {
     name: "Unity",
     icon: UNITY,
   },
+  SHOPIFY: {
+    name: "Shopify",
+    icon: SHOPIFY,
+  },
+  HTML: {
+    name: "HTML",
+    icon: HTML,
+  },
+  CSS: {
+    name: "CSS",
+    icon: CSS,
+  },
 };
 
 const PROJECTS = [
@@ -80,6 +95,13 @@ const PROJECTS = [
     github: "",
     image: "/projects/Proyecto_2.webp",
     tags: [TAGS.JAVA, TAGS.ANDROID, TAGS.FIREBASE],
+  },
+  {
+    title: "Contribución a Pagina Web - Zander Hats® ",
+    description: "Contribución a la página web de Zander Hats®, una marca de diseño y venta de gorras desarrollada con la herramienta Shopify.",
+    link: "https://zanderhats.com/",
+    image: "/projects/Proyecto_6.webp",
+    tags: [TAGS.SHOPIFY, TAGS.CSS],
   },
   {
     title: "La Postreria - eCommerce (Academico)",
