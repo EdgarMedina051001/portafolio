@@ -77,15 +77,17 @@ if (!project) {
       </ul>
 
       <div class="flex justify-between pt-4">
-        <LinkButton href={project.github}>
-          <GithubIcon class="size-6" />
-          View Source
-        </LinkButton>
-        
-        <LinkButton href={project.link}>
-          <WorldIcon class="size-6" />
-          Visit Project
-        </LinkButton>
+        {project.github && (
+          <LinkButton href={project.github}>
+            <GithubIcon class="size-6" /> Codigo Fuente
+          </LinkButton>
+        )}
+        {project.link && (
+          <LinkButton href={project.link}>
+            <WorldIcon class="size-6" />
+            Ver Proyecto
+          </LinkButton>
+        )}
       </div>
       
 
