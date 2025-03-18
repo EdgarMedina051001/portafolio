@@ -1,0 +1,128 @@
+---
+import { PROJECTS } from "@/values/Projects.astro";
+import { slugify } from "@/utils/slugify";
+import Layout from "@/layouts/Layout.astro";
+import SectionContainer from "@/components/SectionContainer.astro";
+import "src/layouts/Layout.astro";
+import GithubIcon from "@/components/icons/GithubIcon.astro";
+import WorldIcon from "@/components/icons/WorldIcon.astro";
+import LinkButton from "@/components/LinkButton.astro";
+
+// Generate paths for each project at build time
+export function getStaticPaths() {
+  return PROJECTS.map((project) => ({
+    params: { slug: slugify(project.title) },
+    props: { project }, // Pass project data as props
+  }));
+}
+
+// Get project data from props
+const { project } = Astro.props;
+
+if (!project) {
+  throw new Error("Proyecto no encontrado");
+}
+---
+
+<Layout
+  title="Detalles del proyecto"
+  description="Detalles del proyecto de la página web de Edgar Medina."
+>
+  <main class="px-4 lg:px-0">
+    <SectionContainer class="py-6 pb-24">
+      <div class="grid grid-cols-3 gap-4 p-10">
+        {/* Imagen horizontal (16:9) */}
+        <div 
+          class="col-span-3 aspect-video rounded-lg overflow-hidden shadow-lg hover:scale-105 transition-transform duration-300 cursor-pointer"
+          onclick={`openModal('${project.image[0]}')`}
+        >
+          <img 
+            src={project.image[0]} 
+            alt={project.title} 
+            class="w-full h-full object-cover"
+          />
+        </div>
+
+        {/* Imágenes verticales (9:16) */}
+        {project.image.slice(1, 4).map((img) => (
+          <div 
+            class="col-span-1 aspect-[9/16] rounded-lg overflow-hidden shadow-lg hover:scale-105 transition-transform duration-300 cursor-pointer"
+            onclick={`openModal('${img}')`}
+          >
+            <img 
+              src={img} 
+              alt={project.title} 
+              class="w-full h-full object-cover"
+            />
+          </div>
+        ))}
+      </div>
+      <h1 class="text-4xl font-bold text-blue-600 mb-6">{project.title}</h1>
+      <p class="text-lg mb-4 text-pretty text-gray-700 dark:text-white/80">
+        {project.description}
+      </p>
+      <ul class="flex gap-x-1 flex-wrap mb-4">
+        {
+          project.tags.map((tag) => (
+            <li>
+              <span
+                class={`bg-gray-200 dark:bg-gray-800 flex gap-x-2 items-center p-2 rounded-md dark:border-white/10 m-1 font-semibold text-gray-700 dark:text-white/80`}
+              >
+                <tag.icon class="size-8" />
+                {tag.name}
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="flex justify-between pt-4">
+        <LinkButton href={project.github}>
+          <GithubIcon class="size-6" />
+          View Source
+        </LinkButton>
+        
+        <LinkButton href={project.link}>
+          <WorldIcon class="size-6" />
+          Visit Project
+        </LinkButton>
+      </div>
+      
+
+      {/* Modal para expandir imágenes */}
+      <div id="imageModal" class="fixed inset-0 z-50 hidden bg-black/80 p-4">
+        <div class="relative w-full h-full flex items-center justify-center">
+          <img id="modalImage" class="max-w-full max-h-full rounded-lg" src="" alt="" />
+          <button 
+            onclick="closeModal()"
+            class="absolute top-4 right-4 text-white text-2xl bg-black/50 rounded-full p-2 hover:bg-black/80"
+          >
+            &times;
+          </button>
+        </div>
+      </div>
+
+
+    </SectionContainer>
+  </main>
+</Layout>
+
+<script is:inline>
+  // Función para abrir el modal
+  function openModal(src) {
+    const modal = document.getElementById("imageModal");
+    const modalImage = document.getElementById("modalImage"); // Asegurar que es un <img>
+    if (modal && modalImage) {
+      modalImage.src = src; // Asignar la imagen seleccionada al modal
+      modal.classList.remove("hidden"); // Mostrar el modal
+    }
+  }
+
+  // Función para cerrar el modal
+  function closeModal() {
+    const modal = document.getElementById("imageModal");
+    if (modal) {
+      modal.classList.add("hidden"); // Ocultar el modal
+    }
+  }
+</script>
