@@ -15,29 +15,43 @@ import ProjectsIcon from "@/components/icons/ProjectsIcon.astro";
   description="Conoce a Edgar Medina, un desarrollador Full-Stack Jr con +2 años de experiencia."
 >
   <main class="px-4 lg:px-0">
-    <SectionContainer class="py-20 pb-24">
+    <SectionContainer class="py-16 md:py-36 pb-24">
       <Hero />
     </SectionContainer>
 
-    <SectionContainer id="experiencia" class="w-full mx-auto lg:w-[740px]">
+    <SectionContainer id="experiencia">
       <TitleSection>
-        Experiencia Laboral <ExperienceIcon class="size-8" />
+        <ExperienceIcon class="size-8" /> Experiencia Laboral
       </TitleSection>
       <Experience />
     </SectionContainer>
 
-    <SectionContainer id="proyectos" class="w-full mx-auto lg:w-[740px]">
+    <SectionContainer id="proyectos">
       <TitleSection>
-        Proyectos <ProjectsIcon class="size-8" />
+        <ProjectsIcon class="size-8" /> Proyectos
       </TitleSection>
       <Projects />
     </SectionContainer>
 
-    <SectionContainer id="sobre-mi" class="w-full mx-auto lg:w-[740px]">
-      <TitleSection>
-        Sobre mí 👨‍💻
-      </TitleSection>
-      <AboutMe/>
+    <SectionContainer id="sobre-mi">
+      <TitleSection> 👨‍💻 Sobre mí </TitleSection>
+      <AboutMe />
     </SectionContainer>
   </main>
 </Layout>
+
+<script is:inline>
+  // Guardar la posición del scroll antes de abandonar la página
+  window.addEventListener("beforeunload", () => {
+    sessionStorage.setItem("scrollPosition", window.scrollY.toString());
+  });
+
+  // Restaurar la posición del scroll al cargar la página
+  window.addEventListener("load", () => {
+    const scrollPosition = sessionStorage.getItem("scrollPosition");
+    if (scrollPosition) {
+      window.scrollTo(0, parseInt(scrollPosition, 10));
+      sessionStorage.removeItem("scrollPosition"); // Limpiar después de restaurar
+    }
+  });
+</script>
