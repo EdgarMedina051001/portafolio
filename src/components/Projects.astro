@@ -1,172 +1,67 @@
 ---
-import JAVA from "./icons/JavaIcon.astro";
-import CSHARP from "./icons/CsharpIcon.astro";
-import SQLSERVER from "./icons/SQLServer.astro";
-import ANDROID from "./icons/AndroidIcon.astro";
-import ZKTECO from "./icons/ZKTecoIcon.astro";
-import ASPNET from "./icons/AspNetIcon.astro";
-import FIREBASE from "./icons/FirebaseIcon.astro";
-import JAVASCRIPT from "./icons/JavaScriptIcon.astro";
-import KOTLIN from "./icons/KotlinIcon.astro";
+import { PROJECTS } from "@/values/Projects.astro";
+import { slugify } from "@/utils/slugify.js";
+
 import LinkButton from "./LinkButton.astro";
 import GithubIcon from "./icons/GithubIcon.astro";
 import WorldIcon from "./icons/WorldIcon.astro";
-import UNITY from "./icons/UnityIcon.astro";
-import SHOPIFY from "./icons/ShopifyIcon.astro";
-import HTML from "./icons/HtmlIcon.astro";
-import CSS from "./icons/CssIcon.astro";
-
-const TAGS = {
-  JAVA: {
-    name: "Java",
-    icon: JAVA,
-  },
-  CSHARP: {
-    name: "C#",
-    icon: CSHARP,
-  },
-  SQLSERVER: {
-    name: "SqlServer",
-    icon: SQLSERVER,
-  },
-  ANDROID: {
-    name: "Android",
-    icon: ANDROID,
-  },
-  ZKTECO: {
-    name: "ZKTeco",
-    icon: ZKTECO,
-  },
-  ASPNET: {
-    name: "ASP.NET",
-    icon: ASPNET,
-  },
-  FIREBASE: {
-    name: "Firebase",
-    icon: FIREBASE,
-  },
-  JAVASCRIPT: {
-    name: "JavaScript",
-    icon: JAVASCRIPT,
-  },
-  KOTLIN: {
-    name: "Kotlin",
-    icon: KOTLIN,
-  },
-  UNITY: {
-    name: "Unity",
-    icon: UNITY,
-  },
-  SHOPIFY: {
-    name: "Shopify",
-    icon: SHOPIFY,
-  },
-  HTML: {
-    name: "HTML",
-    icon: HTML,
-  },
-  CSS: {
-    name: "CSS",
-    icon: CSS,
-  },
-};
-
-const PROJECTS = [
-  {
-    title: "Requisiciones Digitales - COLCHONES WENDY, S.A. DE C.V",
-    description:
-      "Desarrollo de una aplicación web interna para la digitalización del proceso de requisiciones de la empresa, utilizando tecnologías como .NET Framework, SqlServer, ZKTeco, entre otras. La aplicación permite a los empleados solicitar productos y servicios de la empresa, así como también a los administradores y jefes gestionar las requisiciones y productos de la empresa. La aplicación cuenta con un sistema de autenticación mediante huella y roles de usuario, así como también un sistema de notificaciones y correos electrónicos.",
-    link: "",
-    github: "",
-    image: "/projects/Proyecto_1.webp",
-    tags: [
-      TAGS.ZKTECO,
-      TAGS.CSHARP,
-      TAGS.JAVASCRIPT,
-      TAGS.SQLSERVER,
-      TAGS.ASPNET,
-    ],
-  },
-  {
-    title: "Aplicacion Nativa Android - Bombas Mejorada S.A. de C.V.",
-    description:
-      "Desarrollo de una aplicación nativa Android interna para la empresa, utilizando tecnologías como Java, Android Studio y Firebase. Enfocada en la presentación de productos y servicios de la empresa, así como tambien eventos y noticias.",
-    link: "",
-    github: "",
-    image: "/projects/Proyecto_2.webp",
-    tags: [TAGS.JAVA, TAGS.ANDROID, TAGS.FIREBASE],
-  },
-  {
-    title: "Contribución a Pagina Web - Zander Hats® ",
-    description: "Contribución a la página web de Zander Hats®, una marca de diseño y venta de gorras desarrollada con la herramienta Shopify.",
-    link: "https://zanderhats.com/",
-    image: "/projects/Proyecto_6.webp",
-    tags: [TAGS.SHOPIFY, TAGS.CSS],
-  },
-  {
-    title: "La Postreria - eCommerce (Academico)",
-    description: "Desarrollo de una aplicacion movil para el negocio de postres 'La Postreria', utilizando tecnologias como Kotlin, Firebase y Android Studio. Se realizaron dos aplicaciones independientes para el cliente y el administrador, permitiendo a los clientes realizar pedidos y pagos en linea, asi como tambien a los administradores gestionar los productos y pedidos de la empresa.",
-    link: "",
-    github: "https://github.com/EdgarMedina051001/LaPostreria",
-    image: "/projects/Proyecto_3.webp",
-    tags: [TAGS.FIREBASE, TAGS.KOTLIN, TAGS.ANDROID],
-  },
-  {
-    title: "MuñeckoShop - eCommerce (Academico)",
-    description: "Desarrollo de una aplicacion movil para el negocio de camisetas 'MuñeckoShop', utilizando tecnologias como Kotlin, Firebase y Android Studio. Se realizaron dos aplicaciones independientes para clientes y administradores, permitiendo a los clientes realizar pedidos de productos de la empresa, asi como tambien a los administradores gestionar los productos y pedidos de la empresa.",
-    link: "",
-    github: "https://github.com/EdgarMedina051001/MuneckoShop",
-    image: "/projects/Proyecto_4.webp",
-    tags: [TAGS.FIREBASE, TAGS.KOTLIN, TAGS.ANDROID],
-  },
-  {
-    title: "NightKnight - Juego (Academico)",
-    description: "Desarrollo de un juego para computadora utilizando el motor de videojuegos Unity y C#. El juego consiste en un juego de plataformas en 2D, donde el jugador controla a un caballero medieval que debe avanzar por diferentes niveles, evitando obstaculos y enemigos hasta llegar a el final boss.",
-    link: "https://drive.google.com/drive/folders/1LASmc_IIFdINF9qDBnme9gCKVHH1sgEP?usp=sharing",
-    github: "https://drive.google.com/file/d/1SBDeLvZyhWtkpy5TVXmfMoKGyiNGpG9A/view?usp=sharing",
-    image: "/projects/Proyecto_5.webp",
-    tags: [TAGS.CSHARP, TAGS.UNITY],
-  },
-];
 ---
 
-<section class="flex flex-col gap-y-12 rounded-lg dark:bg-violet-950/5 bg-violet-950/5">
+<div class="flex flex-col gap-y-16">
   {
-    PROJECTS.map(({ image, title, description, link, github, tags }) => (
-      <article class="mb-8">
-        <h3 class="text-2xl font-semibold text-blue-500 mb-2">{title}</h3>
-        <p class="text-lg mb-4 text-pretty text-gray-700 dark:text-white/80">{description}</p>
-        <ul class="flex gap-x-1 flex-wrap mb-4">
-          {tags.map((tag) => (
-            <li>
-              <span
-                class={`flex gap-x-2 items-center p-2 rounded-md dark:border-white/10 m-1 font-semibold text-white/80 dark:text-white/80`}
-              >
-                <tag.icon class="size-8" />
-                {tag.name}
-              </span>
-            </li>
-          ))}
-        </ul>
-        <img
-          loading="lazy"
-          class="rounded shadow-2xl dark:shadow-white/50 shadow-black/50 aspect-video"
-          src={image}
-          alt={title}
-        />
-        <footer class="flex gap-x-4 justify-end bg-transparent mt-4">
-          {github && (<LinkButton href={github}>
-            <GithubIcon class="size-6" />
-            Ver Código Fuente
-          </LinkButton>
-          )}
-          {link && (<LinkButton href={link}>
-            <WorldIcon class="size-6" />
-            Ver Proyecto
-          </LinkButton>
-          )}
-        </footer>
+    PROJECTS.map(({ image, title, shortDescription, tags, link, github }) => (
+      <article class="flex flex-col space-x-0 space-y-8 group md:flex-row md:space-x-8 md:space-y-0">
+        <div class="w-full md:w-1/2">
+          <div class="relative flex flex-col items-center col-span-6 row-span-5 gap-8 transition duration-500 ease-in-out transform shadow-xl overflow-hidden rounded-xl sm:rounded-xl md:group-hover:-translate-y-1 md:group-hover:shadow-2xl lg:border lg:border-gray-800 lg:hover:border-gray-700 lg:hover:bg-gray-800/50">
+            <img
+              class="object-cover w-full h-56 transition duration-500 sm:h-full md:scale-110 md:group-hover:scale-105"
+              loading="lazy"
+              src={image[0]}
+              alt={title}
+            />
+          </div>
+        </div>
+
+        <div class="w-full md:w-1/2 md:max-w-lg">
+          <a
+            href={`/projects-view/${slugify(title)}`}
+            class="hover:underline text-2xl font-bold text-blue-600"
+          >
+            {title}
+          </a>
+          <div class="mt-2">
+            <ul class="flex gap-x-1 flex-wrap mb-4">
+              {tags.map((tag) => (
+                <li>
+                  <span
+                    class={`flex gap-x-2 items-center p-2 rounded-md dark:border-white/10 mt-1 font-semibold text-gray-700 dark:text-white/80 bg-gray-200 dark:bg-gray-800`}
+                  >
+                    <tag.icon class="size-4" />
+                    {tag.name}
+                  </span>
+                </li>
+              ))}
+            </ul>
+
+            <div class="mt-2 text-gray-700 dark:text-gray-400">
+              {shortDescription}
+            </div>
+            <footer class="flex items-end justify-start mt-4 gap-x-2">
+              {github && (
+                <LinkButton href={github}>
+                  <GithubIcon class="size-6" /> Codigo Fuente
+                </LinkButton>
+              )}
+              {link && (
+                <LinkButton href={link}>
+                  <WorldIcon class="size-6" />
+                  Ver Proyecto
+                </LinkButton>
+              )}
+            </footer>
+          </div>
+        </div>
       </article>
     ))
   }
-</section>
+</div>
