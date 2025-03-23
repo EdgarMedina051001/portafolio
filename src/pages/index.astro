@@ -8,6 +8,8 @@ import SectionContainer from "../components/SectionContainer.astro";
 import TitleSection from "@/components/TitleSection.astro";
 import ExperienceIcon from "@/components/icons/ExperienceIcon.astro";
 import ProjectsIcon from "@/components/icons/ProjectsIcon.astro";
+import SkillIcon from "@/components/icons/SkillIcon.astro";
+import Skills from "@/components/Skills.astro";
 ---
 
 <Layout
@@ -33,25 +35,16 @@ import ProjectsIcon from "@/components/icons/ProjectsIcon.astro";
       <Projects />
     </SectionContainer>
 
+    <SectionContainer id="skills">
+      <TitleSection>
+        <SkillIcon class="size-8" /> Skills
+      </TitleSection>
+      <Skills />
+    </SectionContainer>
+
     <SectionContainer id="sobre-mi">
       <TitleSection> 👨‍💻 Sobre mí </TitleSection>
       <AboutMe />
     </SectionContainer>
   </main>
 </Layout>
-
-<script is:inline>
-  // Guardar la posición del scroll antes de abandonar la página
-  window.addEventListener("beforeunload", () => {
-    sessionStorage.setItem("scrollPosition", window.scrollY.toString());
-  });
-
-  // Restaurar la posición del scroll al cargar la página
-  window.addEventListener("load", () => {
-    const scrollPosition = sessionStorage.getItem("scrollPosition");
-    if (scrollPosition) {
-      window.scrollTo(0, parseInt(scrollPosition, 10));
-      sessionStorage.removeItem("scrollPosition"); // Limpiar después de restaurar
-    }
-  });
-</script>
