@@ -1,61 +1,77 @@
 ---
+// ✅ Ya no importes EXPERIENCE aquí
+import Anchor from "./Anchor.astro";
 import LinkButton from "./LinkButton.astro";
+import { slugify } from "@/utils/slugify";
 
 interface Props {
   title: string;
+  shortDescription: string;
   description: string;
   link?: string;
   date: string;
   place?: string;
+  image: string;
 }
-const { title, description, link, date, place } = Astro.props;
+
+const { title, description, shortDescription, link, date, place, image } =
+  Astro.props;
 ---
 
-<div
-  class="relative pb-8 grid before:absolute before:left-[-35px] before:block before:h-full before:border-l-2 before:border-black/20 dark:before:border-white/15 before:content-[''] md:grid-cols-5 md:gap-10 md:space-x-4]"
+<article
+  class="flex flex-col space-x-0 space-y-8 group md:flex-row md:space-x-8 md:space-y-0"
 >
-  <div class="relative pb-12 md:col-span-2">
-    <div class="sticky top-0">
-      <span class="text-gray-500 -left-[43.8px] absolute rounded-full text-5xl">
-        &bull;
-      </span>
-      <h3 class="text-xl font-bold text-blue-500 pb-2">{title}</h3>
-      <div class="text-sm text-gray-800 dark:text-white/60 italic">
-        {place}
+  <div
+    class="relative pb-8 grid before:absolute before:left-[-35px] before:block before:h-full before:border-l-2 before:border-black/20 dark:before:border-white/15 before:content-[''] md:grid-cols-5 md:gap-10 md:space-x-4]"
+  >
+    <div class="relative pb-12 md:col-span-2">
+      <div class="sticky top-0">
+        <span
+          class="text-gray-500 -left-[43.8px] absolute rounded-full text-5xl"
+        >
+          &bull;
+        </span>
+        <h3 class="text-xl font-bold text-blue-500 pb-2">{title}</h3>
+        <div class="text-sm text-gray-800 dark:text-white/60 italic">
+          {place}
+        </div>
+        <time class="p-0 m-0 text-sm text-gray-800 dark:text-white/80 italic">
+          {date}
+        </time>
       </div>
-      <time class="p-0 m-0 text-sm text-gray-800 dark:text-white/80 italic"
-        >{date}</time
-      >
+    </div>
+
+    <div
+      class="flex-col gap-2 pb-4 text-gray-800 dark:text-gray-300 md:col-span-3"
+    >
+      {
+        shortDescription.split("\n").map((line) => (
+          <>
+            {line}
+            <br />
+          </>
+        ))
+      }
+
+      <br />
+      <Anchor href={`works-view/${slugify(title + "-" + place)}`}>
+        Saber más
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-5 icon icon-tabler icon-tabler-chevron-right"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <path d="M9 6l6 6l-6 6"></path>
+        </svg>
+      </Anchor>
     </div>
   </div>
-  <div
-    class="flex-col gap-2 pb-4 text-gray-800
-   dark:text-gray-300 md:col-span-3"
-  >
-    {description}
-    <br />
-    <br />
-    {
-      link && (
-        <LinkButton href={link} class="mt-4">
-          Saber más{" "}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="w-5 icon icon-tabler icon-tabler-chevron-right"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            stroke-width="2"
-            stroke="currentColor"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <path d="M9 6l6 6l-6 6" />
-          </svg>
-        </LinkButton>
-      )
-    }
-  </div>
-</div>
+</article>
