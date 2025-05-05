@@ -1,0 +1,125 @@
+---
+import { EXPERIENCE } from "@/values/Experience.astro";
+import { slugify } from "@/utils/slugify";
+import Layout from "@/layouts/Layout.astro";
+import ExperienceIcon from "@/components/icons/ExperienceIcon.astro";
+import SectionContainer from "@/components/SectionContainer.astro";
+import LinkButton from "@/components/LinkButton.astro";
+
+// Generate paths for each project at build time
+export function getStaticPaths() {
+  return EXPERIENCE.map((experience) => ({
+    params: { slug: slugify(experience.title + "-" + experience.place) },
+    props: { experience }, // Pass project data as props
+  }));
+}
+
+// Get project data from props
+const { experience } = Astro.props;
+
+if (!experience) {
+  throw new Error("Trabajo no encontrado");
+}
+---
+
+<Layout
+  title={`Detalles del trabajo - ${experience.title}`}
+  description={`Detalles del trabajo ${experience.title} de Edgar Medina.`}
+>
+  <main class="px-4 lg:px-0">
+    <SectionContainer class="py-6 pb-24">
+      <div class="max-w-4xl mx-auto p-10">
+        {/* Imagen centrada */}
+        <div class="w-full mb-8">
+          <div
+            class="aspect-video rounded-lg overflow-hidden shadow-lg hover:scale-105 transition-transform duration-300 cursor-pointer"
+            onclick={`openModal('${experience.image}')`}
+          >
+            <img
+              src={experience.image}
+              alt={experience.title}
+              class="w-full h-full object-contain"
+            />
+          </div>
+        </div>
+
+        {/* Información del trabajo */}
+        <h1 class="text-4xl font-bold text-blue-600 mb-4">
+          {experience.title}
+        </h1>
+        <div class="text-gray-700 dark:text-white/80 mb-2">
+          <span class="font-semibold">Lugar:</span>
+          {experience.place}
+        </div>
+        <div class="text-gray-700 dark:text-white/80 mb-4">
+          <span class="font-semibold">Periodo:</span>
+          {experience.date}
+        </div>
+
+        <h2 class="text-2xl font-semibold text-blue-500 mb-2">Actividades</h2>
+        <ul class="list-disc pl-6 text-gray-700 dark:text-white/80 mb-6">
+          {experience.description.split("\n").map((line) => <li>{line}</li>)}
+        </ul>
+
+        {
+          experience.link && (
+            <LinkButton
+              href={experience.link}
+              target="_blank"
+              class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+            >
+              Visitar página
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="ml-2 w-5 h-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </LinkButton>
+          )
+        }
+      </div>
+
+      {/* Modal para expandir imágenes */}
+      <div id="imageModal" class="fixed inset-0 z-50 hidden bg-black/80 p-4">
+        <div class="relative w-full h-full flex items-center justify-center">
+          <img id="modalImage" class="max-w-full max-h-full rounded-lg" src="" alt="" />
+          <button 
+            onclick="closeModal()"
+            class="absolute top-4 right-4 text-white text-2xl bg-black/50 rounded-full p-2 hover:bg-black/80"
+          >
+            &times;
+          </button>
+        </div>
+      </div>
+    </SectionContainer>
+  </main>
+</Layout>
+
+<script is:inline>
+  // Función para abrir el modal
+  function openModal(src) {
+    const modal = document.getElementById("imageModal");
+    const modalImage = document.getElementById("modalImage"); // Asegurar que es un <img>
+    if (modal && modalImage) {
+      modalImage.src = src; // Asignar la imagen seleccionada al modal
+      modal.classList.remove("hidden"); // Mostrar el modal
+    }
+  }
+
+  // Función para cerrar el modal
+  function closeModal() {
+    const modal = document.getElementById("imageModal");
+    if (modal) {
+      modal.classList.add("hidden"); // Ocultar el modal
+    }
+  }
+</script>
