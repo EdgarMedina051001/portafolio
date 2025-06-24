@@ -4,6 +4,16 @@ import Anchor from "./Anchor.astro";
 import LinkButton from "./LinkButton.astro";
 import { slugify } from "@/utils/slugify";
 
+interface FeaturedActivity {
+  title: string;
+  description: string;
+  images: Array<{
+    src: string;
+    alt: string;
+  }>;
+}
+
+
 interface Props {
   title: string;
   shortDescription: string;
@@ -12,9 +22,10 @@ interface Props {
   date: string;
   place?: string;
   image: string;
+  featuredActivities: FeaturedActivity;
 }
 
-const { title, description, shortDescription, link, date, place, image } =
+const { title, description, shortDescription, link, date, place, image, featuredActivities } =
   Astro.props;
 ---
 
