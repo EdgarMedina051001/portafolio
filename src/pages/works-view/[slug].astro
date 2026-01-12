@@ -61,29 +61,41 @@ if (!experience) {
           {experience.description.split("\n").map((line) => <li>{line}</li>)}
         </ul>
 
-        {experience.featuredActivities && experience.featuredActivities.map((activity) => (
-        <h2 class="text-2xl font-semibold text-blue-500 mb-2">Actividades Destacadas</h2>
-        <ul class="list-disc pl-6 text-gray-700 dark:text-white/80 mb-6"> 
-            <li>
-              <div class="flex items-center gap-2">
-                <ExperienceIcon class="w-5 h-5" />
-                <span>{activity.title}</span>
-              </div>
-              <div class="text-gray-700 dark:text-white/80 mb-2">
-                {activity.description}
-              </div>
-              <div class="flex gap-2">
-                {activity.images.map((image) => (
-                  <img
-                    src={image.src}
-                    alt={image.alt}
-                    class="w-10 h-10 rounded-full"
-                  />
+        {
+          /* Verificamos si existe Y si tiene elementos dentro (length > 0) */
+          experience.featuredActivities &&
+            experience.featuredActivities.length > 0 && (
+              <>
+                <h2 class="text-2xl font-semibold text-blue-500 mb-2">
+                  Actividades Destacadas
+                </h2>
+
+                {experience.featuredActivities.map((activity) => (
+                  <ul class="list-disc pl-6 text-gray-700 dark:text-white/80 mb-6">
+                    <li>
+                      <div class="flex items-center gap-2">
+                        <ExperienceIcon class="w-5 h-5" />
+                        <span>{activity.title}</span>
+                      </div>
+                      {/* Aquí ya tienes tu clase whitespace-pre-line agregada */}
+                      <div class="text-gray-700 dark:text-white/80 mb-2 whitespace-pre-line">
+                        {activity.description}
+                      </div>
+                      <div class="flex gap-2">
+                        {activity.images.map((image) => (
+                          <img
+                            src={image.src}
+                            alt={image.alt}
+                            class="w-10 h-10 rounded-full"
+                          />
+                        ))}
+                      </div>
+                    </li>
+                  </ul>
                 ))}
-              </div>
-            </li>
-        </ul>
-        ))}
+              </>
+            )
+        }
 
         {
           experience.link && (
@@ -115,8 +127,13 @@ if (!experience) {
       {/* Modal para expandir imágenes */}
       <div id="imageModal" class="fixed inset-0 z-50 hidden bg-black/80 p-4">
         <div class="relative w-full h-full flex items-center justify-center">
-          <img id="modalImage" class="max-w-full max-h-full rounded-lg" src="" alt="" />
-          <button 
+          <img
+            id="modalImage"
+            class="max-w-full max-h-full rounded-lg"
+            src=""
+            alt=""
+          />
+          <button
             onclick="closeModal()"
             class="absolute top-4 right-4 text-white text-2xl bg-black/50 rounded-full p-2 hover:bg-black/80"
           >
