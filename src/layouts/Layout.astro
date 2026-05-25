@@ -1,8 +1,9 @@
 ---
+import "../styles/global.css";
 import "@fontsource/onest/400.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import { ViewTransitions } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
 
 interface Props {
   title: string;
@@ -27,7 +28,35 @@ const { description, title } = Astro.props;
     />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    <ViewTransitions />
+    <ClientRouter />
+
+    <script is:inline>
+      const setTheme = () => {
+        const theme = (() => {
+          if (
+            typeof localStorage !== "undefined" &&
+            localStorage.getItem("theme")
+          ) {
+            return localStorage.getItem("theme");
+          }
+          if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            return "dark";
+          }
+          return "light";
+        })();
+
+        if (theme === "light") {
+          document.documentElement.classList.remove("dark");
+        } else {
+          document.documentElement.classList.add("dark");
+        }
+      };
+
+      // Ejecutar al cargar la página
+      setTheme();
+      // Ejecutar cada vez que navegamos con ClientRouter
+      document.addEventListener("astro:after-swap", setTheme);
+    </script>
   </head>
 
   <body class="relative text-black dark:text-white/80">
@@ -65,10 +94,8 @@ const { description, title } = Astro.props;
         }
       }
 
-      @media (prefers-color-scheme: dark) {
-        body {
-          color: rgba(255, 255, 255, 0.9);
-        }
+      html.dark body {
+        color: rgba(255, 255, 255, 0.9);
       }
 
       #header-nav {
@@ -77,7 +104,7 @@ const { description, title } = Astro.props;
         animation-range: 0 500px;
       }
 
-      @keyframes blur {
+      html.dark blur {
         to {
           backdrop-filter: blur(20px);
           border-width: 1px;
