@@ -58,7 +58,7 @@ if (!experience) {
 
         <h2 class="text-2xl font-semibold text-blue-500 mb-2">Actividades</h2>
         <ul class="list-disc pl-6 text-gray-700 dark:text-white/80 mb-6">
-          {experience.description.split("\n").map((line) => <li>{line}</li>)}
+          {experience.description.map((line) => <li>{line}</li>)}
         </ul>
 
         {
