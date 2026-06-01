@@ -1,15 +1,98 @@
 ---
 import ExperienceItem from "./ExperienceItem.astro";
 import { EXPERIENCE } from "@/values/Experience.astro";
+
+const VISIBLE_COUNT = 4;
+const visibleItems = EXPERIENCE.slice(0, VISIBLE_COUNT);
+const hiddenItems = EXPERIENCE.slice(VISIBLE_COUNT);
 ---
 
-
 <ol class="relative ml-3 pl-3">
-    {
-        EXPERIENCE.map(({ date, place, title, description, shortDescription, link, image }) => (
-            <li class="ms-4">
-                <ExperienceItem {...{ date, place, title, description, shortDescription, link, image }} />
+  {visibleItems.map(({ date, place, title, description, shortDescription, link, image, featuredActivities = [] }) => (
+    <li class="ms-4">
+      <ExperienceItem {...{ date, place, title, description, shortDescription, link, image, featuredActivities }} />
+    </li>
+  ))}
+
+  {hiddenItems.length > 0 && (
+    <>
+      <li class="ms-4">
+        <button
+          id="experience-toggle"
+          aria-expanded="false"
+          class="group flex items-center gap-2 w-full py-2.5 px-4 rounded-xl
+                 border-2 border-dashed border-blue-300/50 dark:border-blue-700/40
+                 bg-blue-50/50 dark:bg-blue-950/20
+                 text-blue-600 dark:text-blue-400
+                 text-sm font-medium
+                 transition-all duration-200
+                 hover:bg-blue-100/60 dark:hover:bg-blue-900/30
+                 hover:border-blue-400/60 dark:hover:border-blue-600/50"
+        >
+          <svg
+            id="experience-toggle-icon"
+            class="w-4 h-4 shrink-0 transition-transform duration-300"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          >
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="8" x2="12" y2="16"/>
+            <line x1="8" y1="12" x2="16" y2="12"/>
+          </svg>
+          <span id="experience-toggle-text">
+            Ver {hiddenItems.length} experiencias anteriores
+          </span>
+          <svg
+            id="experience-chevron"
+            class="w-4 h-4 shrink-0 ml-auto transition-transform duration-300"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          >
+            <path d="M6 9l6 6 6-6"/>
+          </svg>
+        </button>
+      </li>
+
+      <div
+        id="experience-hidden"
+        class="overflow-hidden transition-all duration-500 ease-in-out max-h-0 opacity-0"
+      >
+        <ol class="relative ml-0 pl-0">
+          {hiddenItems.map(({ date, place, title, description, shortDescription, link, image, featuredActivities = [] }) => (
+            <li class="ms-4 opacity-80">
+              <ExperienceItem {...{ date, place, title, description, shortDescription, link, image, featuredActivities }} />
             </li>
-        ))
-    }
+          ))}
+        </ol>
+      </div>
+    </>
+  )}
 </ol>
+
+<script>
+  const btn = document.getElementById("experience-toggle");
+  const container = document.getElementById("experience-hidden");
+  const icon = document.getElementById("experience-toggle-icon");
+  const chevron = document.getElementById("experience-chevron");
+  const label = document.getElementById("experience-toggle-text");
+
+  const HIDDEN_COUNT = container?.querySelectorAll("li").length ?? 0;
+
+  btn?.addEventListener("click", () => {
+    const isOpen = btn.getAttribute("aria-expanded") === "true";
+
+    if (!isOpen) {
+      container!.style.maxHeight = container!.scrollHeight + "px";
+      container!.style.opacity = "1";
+      btn.setAttribute("aria-expanded", "true");
+      chevron!.style.transform = "rotate(180deg)";
+      icon!.innerHTML = `<circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/>`;
+      label!.textContent = "Ocultar experiencias anteriores";
+    } else {
+      container!.style.maxHeight = "0";
+      container!.style.opacity = "0";
+      btn.setAttribute("aria-expanded", "false");
+      chevron!.style.transform = "rotate(0deg)";
+      icon!.innerHTML = `<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/>`;
+      label!.textContent = `Ver ${HIDDEN_COUNT} experiencias anteriores`;
+    }
+  });
+</script>
